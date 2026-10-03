@@ -39,6 +39,9 @@ module svpwm_generator_tb;
     // Stimulus Pattern Vectors Matrix
     // --------------------------------------------------------------------------
     initial begin
+        $dumpfile("dump.vcd");
+        $dumpvars(0, svpwm_generator_tb);
+        
         // Initialize state vectors to default values
         clk     = 1'b0;
         reset_n = 1'b0;
