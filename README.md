@@ -43,6 +43,19 @@ g++ -std=c++17 main_control_unit.cpp -o ecu_core
 
 ### Simulating the Silicon Core:
 Paste `svpwm_generator.v` and `svpwm_generator_tb.v` into any standard EDA tool (e.g., Vivado, ModelSim, or EDA Playground) to observe center-aligned PWM waveforms and verify dead-time execution profiles.
+---
+
+## 📊 Verification Simulation Outputs
+
+### 1. High-Level Physics Control Loop Verification (Python Matrix Model):
+![Physics Simulation](physics_simulation.png)
+
+### 2. Safety-Critical ECU Firmware Execution Log (C++ State Machine Monitoring):
+![Firmware Output](firmware_output.png)
+
+### 3. Silicon RTL SVPWM Hardware Timing Diagrams (Verilog Center-Aligned Waveforms):
+![Hardware Waveforms](hardware_waveforms.png)
+
 
 ---
 **Developer:** Vishal R (IIT Madras, Electrical Engineering)  
