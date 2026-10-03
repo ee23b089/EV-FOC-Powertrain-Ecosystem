@@ -1,8 +1,17 @@
 # EV Field-Oriented Control (FOC) Powertrain Ecosystem
 An industrial-grade, multi-tier hardware/software simulation ecosystem modeling a Permanent Magnet Synchronous Motor (PMSM) Traction Inverter for Electric Vehicles.
 
-## 🚀 System Architecture Overview
+### 🚀 System Architecture Overview
 This repository implements a modular, high-reliability safety-critical EV motor control ecosystem split across three distinct design abstractions:
+
+```
+📦 EV-FOC-Powertrain-Ecosystem
+ ┣ 📂 simulation_model     # High-level system control mathematical engine (Python)
+ ┣ 📂 ecu_firmware          # Safety-critical ECU State Machine & CAN Telemetry (C++)
+ ┣ 📂 ecu_rtos_kernel      # Preemptive FreeRTOS Multitasking Safety Core (C++)
+ ┗ 📂 rtl_hardware_core     # Ultra-low latency SVPWM Generation Core (Verilog RTL)
+```
+
 
 ---
 
@@ -23,6 +32,14 @@ This repository implements a modular, high-reliability safety-critical EV motor 
 *   **Core Module:** Space Vector Pulse Width Modulation (**SVPWM**) co-processor core running alongside a symmetric center-aligned triangular carrier wave generator.
 *   **Critical Safety Feature:** Implements dedicated hardware **Dead-Time Insertion** pipelines (50 clock-cycle gating windows) to completely prevent split-rail shoot-through current shorts in the inverter bridge transistors.
 *   **Verification Verification:** Paired with an automated testbench matrix simulating high-speed dynamic sector change vector switches.
+
+## 📂 4. Preemptive Real-Time Kernel Layer (`/ecu_rtos_kernel`)
+*   **Implementation:** Embedded C++ with FreeRTOS Kernel layers.
+*   **Task Scheduling:** Replaces sequential main loops with a deterministic, priority-driven scheduler tracking three concurrent processes (Safety, Control computation, Dashboard refresh).
+*   **Preemptive Safety Execution:** The high-priority safety task actively checks parameters every 50ms, instantly demoting other routines to idle tier to isolate power if thresholds are breached.
+
+### 📊 Real-Time Preemptive Kernel Verification:
+*Interactive Dev Environment:* [Run the interactive FreeRTOS Kernel live on Wokwi](https://wokwi.com)
 
 ---
 
@@ -56,6 +73,11 @@ Paste `svpwm_generator.v` and `svpwm_generator_tb.v` into any standard EDA tool 
 
 ### 3. Silicon RTL SVPWM Hardware Timing Diagrams (Verilog Center-Aligned Waveforms):
 ![Hardware Waveforms](hardware_waveforms.png)
+
+### 4. Real-Time Preemptive Kernel Verification (Live FreeRTOS Scheduler Loops):
+![FreeRTOS Live Run](rtos_live_run.gif)
+
+
 
 
 ---
