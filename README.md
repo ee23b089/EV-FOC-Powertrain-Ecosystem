@@ -59,5 +59,4 @@ Paste `svpwm_generator.v` and `svpwm_generator_tb.v` into any standard EDA tool 
 
 
 ---
-**Developer:** Vishal R (IIT Madras, Electrical Engineering)  
-*Project designed for off-campus recruitment verification.*
+**Developer:** Vishal R (IIT Madras, Electrical Engineering)
